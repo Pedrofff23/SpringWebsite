@@ -1,5 +1,6 @@
 package com.example.mavenspring.model;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.lang.NonNull;
 
 import javax.persistence.Entity;
@@ -8,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 
+
 @Entity
 public class Banco {
     @Id
@@ -15,10 +17,10 @@ public class Banco {
     private Integer id;
     @NotBlank
     @NonNull
-    private Integer nome;
+    private String nome;
     @NotBlank
     @NonNull
-    private Integer numero;
+    private String numero;
 
     public Banco() {
     }
@@ -32,20 +34,29 @@ public class Banco {
     }
 
     @NonNull
-    public Integer getNome() {
+    public String getNome() {
         return nome;
     }
 
-    public void setNome(@NonNull Integer nome) {
+    public void setNome(@NonNull String nome) {
         this.nome = nome;
     }
 
     @NonNull
-    public Integer getNumero() {
+    public String getNumero() {
         return numero;
     }
 
-    public void setNumero(@NonNull Integer numero) {
+    public void setNumero(@NonNull String numero) {
         this.numero = numero;
+    }
+
+    @Override
+    public String toString() {
+        return "Banco{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", numero='" + numero + '\'' +
+                '}';
     }
 }
