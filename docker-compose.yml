@@ -17,8 +17,8 @@ services:
     ports:
       - "5455:5432"
   app:
+    image: pedrofff/spring
     container_name: Spring
-    build: .
     ports:
       - "8080:8080"
     depends_on:

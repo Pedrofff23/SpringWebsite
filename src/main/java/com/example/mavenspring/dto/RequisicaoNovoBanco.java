@@ -1,10 +1,26 @@
 package com.example.mavenspring.dto;
 
 import com.example.mavenspring.model.Banco;
+import org.springframework.lang.NonNull;
+
+import javax.validation.constraints.NotBlank;
 
 public class RequisicaoNovoBanco {
+    @NonNull
+    @NotBlank
     private String nome;
+
+    @NonNull
+    @NotBlank
     private String numero;
+
+    @Override
+    public String toString() {
+        return "RequisicaoNovoBanco{" +
+                "nome='" + nome + '\'' +
+                ", numero='" + numero + '\'' +
+                '}';
+    }
 
     public String getNome() {
         return nome;

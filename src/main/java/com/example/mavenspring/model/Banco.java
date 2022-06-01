@@ -15,11 +15,7 @@ public class Banco {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @NotBlank
-    @NonNull
     private String nome;
-    @NotBlank
-    @NonNull
     private String numero;
 
     public Banco() {
