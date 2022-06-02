@@ -1,0 +1,24 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html lang="pt-BR" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragmentos :: head('Novo banco')}"></head>
+<body>
+<header th:replace="~{fragmentos :: header('Banco #' + ${banco.id})}"></header>
+    <main>
+        <div class="container mt-4">
+            <div class="row">
+                <div class="col-12">
+                    <b>Nome:</b><span th:text="${banco.nome}"></span><br/>
+                    <b>Numero:</b><span th:text="${banco.numero}"></span><br/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <a href="#"><button class="btn btn-primary">Editar</button></a>
+                    <a href="/bancos"><button class="btn btn-primary">Lista de Bancos</button></a>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
