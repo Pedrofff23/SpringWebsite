@@ -7,26 +7,34 @@
     <meta charset="UTF-8">
     <title>New Banco</title>
 </head>
-
+<h1 style="margin: 20px"> Adicionar novo Banco</h1>
 <body>
 <div class="container" style="margin: 10px">
-    <div>
-        <a href="/banco"><button class="btn btn-info btn-lg">VOLTAR</button></a>
+    <div class="row">
+        <form class="form-inline" style="margin: 20px 0" th:object="${requisicaoNovoBanco}" action="/bancos" method="POST">
+            <div class="mb-3">
+                <label class="form-label">Nome do Banco</label>
+                <input class="form-control" th:errorclass="is-invalid" type="text" th:placeholder="nome" th:field="*{nome}">
+                <div class="invalid-feedback" th:errors="*{nome}"></div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Numero do Banco</label>
+                <input class="form-control" th:errorclass="is-invalid" type="text" th:placeholder="numero" th:field="*{numero}">
+                <div class="invalid-feedback" th:errors="*{numero}"></div>
+            </div>
+<!--            <div class="mb-3">-->
+<!--                <label class="form-label">Status</label>-->
+<!--                <select class="form-select" name="StatusBanco">-->
+<!--                    <option th:each="status : ${listaStatusBanco}"-->
+<!--                            th:value="${status}" th:text="${status}"></option>-->
+<!--                </select>-->
+<!--            </div>-->
+            <div class="mb-3"><button type="submit" class="btn btn-primary">Adicionar novo banco</button>
+            </div>
+        </form>
+        <a href="/bancos"><button class="btn btn-primary">Voltar</button></a>
     </div>
-    <form class="form-inline" method="POST" style="margin: 20px 0" th:object="${banco}" th:action="@{/banco/new}">
-        <div class="mb-3">
-            <label class="form-label">Nome do Banco</label>
-            <input class="form-control" th:errorclass="is-invalid" type="text" th:field="*{nome}" th:placeholder="nome">
-            <div class="invalid-feedback" th:errors="*{nome}"></div>
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Numero</label>
-            <input class="form-control" th:errorclass="is-invalid"  type="text" th:field="*{numero}" th:placeholder="numero">
-            <div class="invalid-feedback" th:errors="*{numero}"></div>
-        </div>
-        <div class="mb-3"><button type="submit" class="btn btn-primary">Adicionar novo banco</button></div>
 </div>
-</form>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 </body>
 </html>

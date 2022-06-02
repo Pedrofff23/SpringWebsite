@@ -11,7 +11,7 @@
 <div class="container" style="margin: 10px">
 
     <div>
-        <a href="/banco/new"><button class="btn btn-primary">Adicionar Banco</button></a>
+        <a href="/bancos/new"><button class="btn btn-primary">Adicionar Banco</button></a>
     </div>
     <div class="row">
         <h1 class="panel-title">Lista de bancos</h1>
@@ -29,12 +29,12 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="bancoRepository : ${bancos}">
-                <td th:text="${bancoRepository.id}"></td>
-                <td th:text="${bancoRepository.nome}"></td>
-                <td th:text="${bancoRepository.numero}"></td>
-                <td class="col-1"><a href="#">Editar<a/></td>
-                <td class="col-1"><a href="#">Excluir<a/></td>
+            <tr th:each="banco : ${bancos}">
+                <td th:text="${banco.id}"></td>
+                <td th:text="${banco.nome}"></td>
+                <td th:text="${banco.numero}"></td>
+                <td class="col-1"><a href="#">Editar</a></td>
+                <td class="col-1"><a href="#">Excluir</a></td>
             </tr>
             </tbody>
         </table>
