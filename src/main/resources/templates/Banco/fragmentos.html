@@ -1,0 +1,29 @@
+
+
+
+<div class="container" style="margin: 10px" th:fragment="form(requisicaoNovoBanco,action)">
+    <div class="row">
+        <form class="form-inline" style="margin: 20px 0" th:object="${requisicaoNovoBanco}" th:action="${action}" method="POST"> <!--th:action="@{/bancos/{bancoId}(bancoId = ${bancoId})}" -->
+            <div class="mb-3">
+                <label class="form-label">Nome do Banco</label>
+                <input class="form-control" th:errorclass="is-invalid" type="text" th:placeholder="nome" th:field="*{nome}">
+                <div class="invalid-feedback" th:errors="*{nome}"></div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Numero do Banco</label>
+                <input class="form-control" th:errorclass="is-invalid" type="text" th:placeholder="numero" th:field="*{numero}">
+                <div class="invalid-feedback" th:errors="*{numero}"></div>
+            </div>
+            <!--            <div class="mb-3">-->
+            <!--                <label class="form-label">Status</label>-->
+            <!--                <select class="form-select" name="StatusBanco">-->
+            <!--                    <option th:each="status : ${listaStatusBanco}"-->
+            <!--                            th:value="${status}" th:text="${status}"></option>-->
+            <!--                </select>-->
+            <!--            </div>-->
+            <div class="mb-3"><button type="submit" class="btn btn-primary">Alterar Banco </button>
+            </div>
+        </form>
+        <a href="/bancos"><button class="btn btn-primary">Voltar</button></a>
+    </div>
+</div>

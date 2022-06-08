@@ -14,7 +14,7 @@
             </div>
             <div class="row">
                 <div class="col-12">
-                    <a href="#"><button class="btn btn-primary">Editar</button></a>
+                    <a th:href="@{/bancos/{bancoId}/edit(bancoId = ${banco.id})}"><button class="btn btn-primary">Editar</button></a>
                     <a href="/bancos"><button class="btn btn-primary">Lista de Bancos</button></a>
                 </div>
             </div>

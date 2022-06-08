@@ -19,7 +19,27 @@ public class RequisicaoNovoBanco {
     public String getNome() {
         return nome;
     }
+    public Banco toBanco(){
+        Banco banco = new Banco();
+        banco.setNome(this.nome);
+        banco.setNumero(this.numero);
+        banco.setStatusBanco(this.statusBanco);
 
+        return banco;
+    }
+
+    public void fromBanco(Banco banco){
+        this.nome = banco.getNome();
+        this.numero = banco.getNumero();
+        this.statusBanco = banco.getStatusBanco();
+    }
+
+    public Banco toBanco(Banco banco){
+        banco.setNome(this.nome);
+        banco.setNumero(this.numero);
+
+        return banco;
+    }
     public void setNome(String nome) {
         this.nome = nome;
     }
@@ -38,15 +58,6 @@ public class RequisicaoNovoBanco {
 
     public void setStatusBanco(StatusBanco statusBanco) {
         this.statusBanco = statusBanco;
-    }
-    
-    public Banco toBanco(){
-        Banco banco = new Banco();
-        banco.setNome(this.nome);
-        banco.setNumero(this.numero);
-        banco.setStatusBanco(this.statusBanco);
-
-        return banco;
     }
 
     @Override

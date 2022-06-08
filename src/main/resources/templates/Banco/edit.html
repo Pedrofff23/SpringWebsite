@@ -1,12 +1,11 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
 <html lang="pt-BR" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="~{fragmentos :: head('Adicionar Banco')}"></head>
+<head th:replace="~{fragmentos :: head('Editar Banco')}"></head>
 
 <body>
-<header th:replace="~{fragmentos :: header('Adicionar Banco')}"></header>
-
-<div th:replace="~{Banco/fragmentos :: form(requisicaoNovoBanco,'/bancos')}">Formulario </div>
+<header th:replace="~{fragmentos :: header('Editar Banco #' + ${bancoId})}"></header>
+<div th:replace="~{Banco/fragmentos :: form(requisicaoNovoBanco,'/bancos/'+ ${bancoId})}">Formulario </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 </body>
 </html>

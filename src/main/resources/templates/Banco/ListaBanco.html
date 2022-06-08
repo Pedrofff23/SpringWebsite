@@ -27,8 +27,8 @@
                 <td th:text="${banco.nome}"></td>
                 <td th:text="${banco.numero}"></td>
                 <td class="col-1"><a th:href="@{/bancos/{bancoId}(bancoId = ${banco.id})}">Mostrar</a></td>
-                <td class="col-1"><a href="#">Editar</a></td>
-                <td class="col-1"><a href="#">Excluir</a></td>
+                <td class="col-1"><a th:href="@{/bancos/{bancoId}/edit(bancoId = ${banco.id})}">Editar</a></td>
+                <td class="col-1"><a th:href="@{/bancos/{bancoId}/delete(bancoId = ${banco.id})}">Excluir</a></td>
             </tr>
             </tbody>
         </table>

@@ -5,6 +5,7 @@ import com.example.mavenspring.dto.RequisicaoNovoBanco;
 import com.example.mavenspring.model.Banco;
 import com.example.mavenspring.model.StatusBanco;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -39,7 +40,6 @@ public class BancoController {
         return mv;
     }
 
-
     @PostMapping("")
     public ModelAndView salvar(@Valid RequisicaoNovoBanco requisicao, BindingResult bindingResult){
         if (bindingResult.hasErrors()){
@@ -69,8 +69,58 @@ public class BancoController {
             return mv;
         }
         else {
-            return new ModelAndView("redirect:/bancos");
+            return new ModelAndView("redirect:/bancos"); //POSSO FAZER UMA PAGINA DE ERRO MELHOR FICA A DICA
         }
+    }
 
+    @GetMapping("/{id}/edit")
+    public ModelAndView edit(@PathVariable Integer id, RequisicaoNovoBanco requisicao){
+        Optional<Banco> optional= this.bancoRepository.findById(id);
+
+        if(optional.isPresent()){
+            Banco banco = optional.get();
+            requisicao.fromBanco(banco);
+
+            ModelAndView mv = new ModelAndView("Banco/edit");
+            mv.addObject("bancoId", banco.getId());
+
+            return mv;
+        }
+        else {
+            return new ModelAndView("redirect:/bancos");  //POSSO FAZER UMA PAGINA DE ERRO MELHOR FICA A DICA
+        }
+    }
+
+    @PostMapping("/{id}")
+    public ModelAndView update(@PathVariable Integer id,@Valid RequisicaoNovoBanco requisicao, BindingResult bindingResult){
+        if (bindingResult.hasErrors()){
+            ModelAndView mv = new ModelAndView("Banco/edit");
+            mv.addObject("bancoId", id);
+            mv.addObject("listaStatusBancoo", StatusBanco.values());
+            return mv;
+        }
+        else {
+            Optional<Banco> optional= this.bancoRepository.findById(id);
+
+            if(optional.isPresent()){
+                Banco banco = requisicao.toBanco(optional.get());
+                this.bancoRepository.save(banco);
+
+                return new ModelAndView("redirect:/bancos/" + banco.getId());
+            }
+            else {
+                return new ModelAndView("redirect:/bancos");  //POSSO FAZER UMA PAGINA DE ERRO MELHOR FICA A DICA
+            }
+        }
+    }
+
+    @GetMapping("/{id}/delete")
+    public String excluir(@PathVariable Integer id){
+        try{
+            this.bancoRepository.deleteById(id);
+            return "redirect:/bancos";
+        }catch (EmptyResultDataAccessException e){
+            return "redirect:/bancos";
+        }
     }
 }
