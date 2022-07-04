@@ -1,11 +1,67 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
 <html lang="pt-BR" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="~{fragmentos :: head('Editar Banco')}"></head>
+<head>
+    <meta charset="UTF-8">
+    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" th:href="@{/styles/css/components.css}">
+    <title>Editar Banco</title>
+    <script type="text/javascript" th:src="@{/js/cssandjs/actions.js}"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+          crossorigin="anonymous">
+</head>
 
 <body>
-<header th:replace="~{fragmentos :: header('Editar Banco #' + ${bancoId})}"></header>
-<div th:replace="~{Banco/fragmentos :: form(requisicaoNovoBanco,'/bancos/'+ ${bancoId})}">Formulario </div>
+<header>
+    <nav class="navbar navbar-dark bg-dark">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a aria-current="page" class="nav-link bg-dark"
+                   th:classappend="${#httpServletRequest.getRequestURI().equals('/') ? 'active':''}"
+                   href="/">Home</a>
+            </li>
+            <li class="nav-item">
+                <a  class="nav-link bg-dark"
+                    th:classappend="${#httpServletRequest.getRequestURI().startsWith('/bancos') ? 'active' :''}"
+                    href="/bancos">Lista de Bancos</a>
+            </li>
+            <li class="nav-item">
+                <a  class="nav-link bg-dark"
+                    th:classappend="${#httpServletRequest.getRequestURI().startsWith('/agencia') ? 'active' :''}"
+                    href="/agencia">Lista de Agencias</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<h1 class="container" style="margin: 10px" th:text="'Editar Banco #' + ${bancoId}"></h1>
+
+<div class="container" style="margin: 10px">
+    <div class="row">
+        <form class="form-inline" style="margin: 20px 0" th:object="${requisicaoNovoBanco}" th:action="@{/bancos/{bancoId}(bancoId = ${bancoId})}" method="POST"> <!--th:action="@{/bancos/{bancoId}(bancoId = ${bancoId})}" -->
+            <div class="mb-3">
+                <label class="form-label">Nome do Banco</label>
+                <input class="form-control" th:errorclass="is-invalid" type="text" th:placeholder="nome" th:field="*{nome}">
+                <div class="invalid-feedback" th:errors="*{nome}"></div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Numero do Banco</label>
+                <input class="form-control" th:errorclass="is-invalid" type="text" th:placeholder="numero" th:field="*{numero}">
+                <div class="invalid-feedback" th:errors="*{numero}"></div>
+            </div>
+            <!--            <div class="mb-3">-->
+            <!--                <label class="form-label">Status</label>-->
+            <!--                <select class="form-select" name="StatusBanco">-->
+            <!--                    <option th:each="status : ${listaStatusBanco}"-->
+            <!--                            th:value="${status}" th:text="${status}"></option>-->
+            <!--                </select>-->
+            <!--            </div>-->
+            <div class="mb-3"><button type="submit" class="btn btn-primary">Alterar Banco </button>
+            </div>
+        </form>
+        <a href="/bancos"><button class="btn btn-primary">Voltar</button></a>
+    </div>
+</div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 </body>
 </html>

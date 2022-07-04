@@ -5,6 +5,7 @@ import org.springframework.lang.NonNull;
 import javax.persistence.*;
 
 @Entity
+@Table(name="banco")
 public class Banco {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

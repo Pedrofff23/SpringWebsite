@@ -5,6 +5,7 @@ import com.example.mavenspring.model.StatusBanco;
 import org.springframework.lang.NonNull;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 //Data transfer Objet = DTO
 public class RequisicaoNovoBanco {
@@ -16,9 +17,7 @@ public class RequisicaoNovoBanco {
     private String numero;
     private StatusBanco statusBanco;
 
-    public String getNome() {
-        return nome;
-    }
+
     public Banco toBanco(){
         Banco banco = new Banco();
         banco.setNome(this.nome);
@@ -40,6 +39,11 @@ public class RequisicaoNovoBanco {
 
         return banco;
     }
+
+    public String getNome() {
+        return nome;
+    }
+
     public void setNome(String nome) {
         this.nome = nome;
     }

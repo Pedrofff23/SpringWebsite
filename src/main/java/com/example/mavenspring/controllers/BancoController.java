@@ -6,6 +6,9 @@ import com.example.mavenspring.model.Banco;
 import com.example.mavenspring.model.StatusBanco;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -23,13 +26,37 @@ public class BancoController {
     @Autowired
     private BancoRepository bancoRepository;
 
-    @RequestMapping("")
-    public ModelAndView listar(){
-        List<Banco> bancos = this.bancoRepository.findAll();
-        ModelAndView mv = new ModelAndView("Banco/ListaBanco");
-        mv.addObject("bancos",bancos);
+//    @RequestMapping("")
+//    public ModelAndView listar(Pageable pageable, @RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size){
+//
+//        Integer currentPage = page.orElse(0); //define por padrao a requisicao por pagina a defaunt sendo a pagina 0
+//        Integer pageSize = size.orElse(20); //define o tamanho de cada pagina pelo numero de elementos.
+//
+//        //agora nao passa uma lista completa e sim apenas um pagina com os requisitos que queremos.
+//        Page<Banco> pageBanco = this.bancoRepository.findAll(PageRequest.of(currentPage, pageSize));
+//        ModelAndView mv = new ModelAndView("Banco/ListaBanco");
+//        mv.addObject("bancos",pageBanco);
+//
+//        return mv;
+//    }
 
-        return mv;
+    @GetMapping("")
+    public ModelAndView banco(Pageable pageable,
+                              @RequestParam("page") Optional<Integer> page,
+                              @RequestParam("size") Optional<Integer> size,
+                              @RequestParam("filtro")Optional<String> filtro){
+
+        int currentPage = page.orElse(0);
+        int pageSize = size.orElse(20) ;
+        String filter = filtro.orElse("");
+
+        Page<Banco> lista  = this.bancoRepository.searchByFilter("%"+filter+"%",PageRequest.of(currentPage , pageSize));
+        System.out.println("%"+filter+"%");
+
+        ModelAndView modelAndView = new ModelAndView("Banco/ListaBanco");
+        modelAndView.addObject("filtro", new String());
+        modelAndView.addObject("bancos",lista);
+        return modelAndView;
     }
 
     @GetMapping("/new")
@@ -69,7 +96,7 @@ public class BancoController {
             return mv;
         }
         else {
-            return new ModelAndView("redirect:/bancos"); //POSSO FAZER UMA PAGINA DE ERRO MELHOR FICA A DICA
+            return this.retunrErrorBanco("SHOW ERROR: Banco #" + id + " não encontrado"); //POSSO FAZER UMA PAGINA DE ERRO MELHOR FICA A DICA
         }
     }
 
@@ -87,7 +114,7 @@ public class BancoController {
             return mv;
         }
         else {
-            return new ModelAndView("redirect:/bancos");  //POSSO FAZER UMA PAGINA DE ERRO MELHOR FICA A DICA
+            return this.retunrErrorBanco("EDIT ERROR: Banco #" + id + " não encontrado"); //POSSO FAZER UMA PAGINA DE ERRO MELHOR FICA A DICA
         }
     }
 
@@ -109,18 +136,28 @@ public class BancoController {
                 return new ModelAndView("redirect:/bancos/" + banco.getId());
             }
             else {
-                return new ModelAndView("redirect:/bancos");  //POSSO FAZER UMA PAGINA DE ERRO MELHOR FICA A DICA
+                return this.retunrErrorBanco("UPDATE ERROR: Banco #" + id + " não encontrado");
             }
         }
     }
 
     @GetMapping("/{id}/delete")
-    public String excluir(@PathVariable Integer id){
+    public ModelAndView excluir(@PathVariable Integer id){
+        ModelAndView mv = new ModelAndView("redirect:/bancos");
         try{
             this.bancoRepository.deleteById(id);
-            return "redirect:/bancos";
+            mv.addObject("mensagem", "Banco #" + id + " deletado com sucesso");
+            mv.addObject("erro", false);
         }catch (EmptyResultDataAccessException e){
-            return "redirect:/bancos";
+            mv = this.retunrErrorBanco("DELETE ERROR: Banco #" + id + " não encontrado");
         }
+        return mv;
+    }
+
+    private ModelAndView retunrErrorBanco(String msg){
+        ModelAndView mv = new ModelAndView("redirect:/bancos");
+        mv.addObject("mensagem", msg);
+        mv.addObject("erro", true);
+        return mv;
     }
 }
