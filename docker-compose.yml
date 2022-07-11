@@ -16,11 +16,14 @@ services:
       LANG: pt_BR.utf8
     ports:
       - "5455:5432"
+    mem_limit: 300m
+
   app:
     image: pedrofff/spring
     container_name: Spring
     ports:
       - "8080:8080"
+    mem_limit: 500m
     depends_on:
       - db
 
