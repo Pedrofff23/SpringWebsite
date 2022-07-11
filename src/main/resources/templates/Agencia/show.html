@@ -1,0 +1,62 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html lang="pt-BR" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:fragment="head(titulo)">
+    <link rel="stylesheet"  href="/css/bootstrap.min.css">
+    <script src="/js/bootstrap.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+          rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+          crossorigin="anonymous">
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="/css/style.css">
+    <title th:text="${titulo}">Agencia</title>
+</head>
+
+<body>
+<header>
+    <nav class="navbar navbar-dark bg-dark">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a aria-current="page" class="nav-link bg-dark"
+                   th:classappend="${#httpServletRequest.getRequestURI().equals('/') ? 'active':''}"
+                   href="/">Home</a>
+            </li>
+            <li class="nav-item">
+                <a  class="nav-link bg-dark"
+                    th:classappend="${#httpServletRequest.getRequestURI().startsWith('/bancos') ? 'active' :''}"
+                    href="/bancos">Lista de Bancos</a>
+            </li>
+            <li class="nav-item">
+                <a  class="nav-link bg-dark"
+                    th:classappend="${#httpServletRequest.getRequestURI().startsWith('/agencia') ? 'active' :''}"
+                    href="/agencia">Lista de Agencias</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<h1 class="container" style="margin: 10px" th:text="'Agencia #' + ${agencia.id}"></h1>
+<main>
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-12">
+                <b>Nome da Agencia:</b><span th:text="${agencia.nome_agencia}"></span><br/>
+                <b>Numero da Agencia:</b><span th:text="${agencia.agencia}"></span><br/>
+                <b>Id do Banco:</b><span th:text="${agencia.id_banco}"></span><br/>
+                <b>Endereco:</b><span th:text="${agencia.endereco}"></span><br/>
+                <b>fone:</b><span th:text="${agencia.fone}"></span><br/>
+                <b>tipo:</b><span th:text="${agencia.tipo}"></span><br/>
+                <b>fone1:</b><span th:text="${agencia.fone1}"></span><br/>
+                <b>tipo1:</b><span th:text="${agencia.tipo1}"></span><br/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <a th:href="@{/agencia/{bancoId}/edit(agenciaId = ${agencia.id})}"><button class="btn btn-primary">Editar</button></a>
+                <a href="/agencia"><button class="btn btn-primary">Lista de Agencias</button></a>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>

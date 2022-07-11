@@ -1,12 +1,8 @@
 package com.example.mavenspring.controllers;
 
 import com.example.mavenspring.Repository.AgenciaRepository;
-import com.example.mavenspring.Repository.BancoRepository;
 import com.example.mavenspring.dto.RequisicaoNovaAgencia;
-import com.example.mavenspring.dto.RequisicaoNovoBanco;
-import com.example.mavenspring.model.Banco;
 import com.example.mavenspring.model.StatusAgencia;
-import com.example.mavenspring.model.StatusBanco;
 import com.example.mavenspring.model.agencia_bancaria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
