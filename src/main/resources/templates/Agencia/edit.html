@@ -13,7 +13,11 @@
 
 </head>
 
-<body>
+<body style="width: 100%;
+  background: rgb(2,0,36);
+  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(12,21,106,1) 50%, rgba(2,88,106,1) 100%);
+  background-size: cover;
+  background-position: center;">
 <header th:fragment="header(titulo)">
     <nav class="navbar navbar-dark bg-dark">
         <ul class="nav nav-tabs">
@@ -31,6 +35,10 @@
                 <a  class="nav-link bg-dark"
                     th:classappend="${#httpServletRequest.getRequestURI().startsWith('/agencia') ? 'active' :''}"
                     href="/agencia">Lista de Agencias</a>
+            </li>
+            <li class="nav-item">
+                <a  class="nav-link bg-dark"
+                    th:href="@{/logout}">Logout</a>
             </li>
         </ul>
     </nav>

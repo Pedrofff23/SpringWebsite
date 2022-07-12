@@ -13,7 +13,11 @@
           crossorigin="anonymous">
 </head>
 
-<body>
+<body style="width: 100%;
+  background: rgb(2,0,36);
+  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(12,21,106,1) 50%, rgba(2,88,106,1) 100%);
+  background-size: cover;
+  background-position: center;" class="text-white">
 <!--faz uma requisicao get para o caminh especificado passando as variaveis size (tamanho da pagina) e page (qual pagina a ser visitada 0 a N pagina)-->
 <!--<div   th:if="${bancos.getNumber()} != ${bancos.getSize()}">-->
 <!--    <a th:href="@{/bancos (page = ${bancos.number + 1} , size = ${bancos.size})}"><h1>Proxima Pagina</h1></a>-->
@@ -37,9 +41,13 @@
                     th:classappend="${#httpServletRequest.getRequestURI().startsWith('/agencia') ? 'active' :''}"
                     href="/agencia">Lista de Agencias</a>
             </li>
+            <li class="nav-item">
+                <a  class="nav-link bg-dark"
+                    th:href="@{/logout}">Logout</a>
+            </li>
         </ul>
     </nav>
-    <div class="container" style="margin: 10px">
+    <div class="container text-white" style="margin: 10px">
         <div class="row">
             <h1 class="panel-title">Lista de Agencias</h1>
         </div>
@@ -75,7 +83,7 @@
         </div>
         <div class="row">
             <div class="col-12">
-                <table class="table">
+                <table class="table text-white">
                     <thead>
                     <tr>
                         <th scope="col">Nome</th>
@@ -92,7 +100,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="agencia : ${agencia_bancaria}">
+                    <tr th:each="agencia : ${agencia_bancaria}" class="text-white">
                         <td th:text="${agencia.nome_agencia}"></td>
                         <td th:text="${agencia.agencia}"></td>
                         <td th:text="${agencia.id_banco}"></td>
