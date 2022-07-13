@@ -62,12 +62,12 @@
     </form>
     <div class="bar-element" th:if="${agencia_bancaria.number != 0}">
         <a th:href="@{/agencia (size =${agencia_bancaria.size} , page = ${agencia_bancaria.number -1})}">
-            <button class="custom-btn btn-16" role="button">Voltar Pagina</button>
+            <button class="btn btn-primary" style="margin: 10px">Voltar Pagina</button>
         </a>
     </div>
     <div class="bar-element" th:if="${agencia_bancaria.number != agencia_bancaria.totalPages}">
         <a th:href="@{/agencia(page = ${agencia_bancaria.number+ 1}, size = ${agencia_bancaria.size})}">
-            <button class="custom-btn btn-16" role="button">Proxima Pagina</button>
+            <button class="btn btn-primary" style="margin: 10px; border: 5px">Proxima Pagina</button>
         </a>
     </div>
     <div class="container" style="margin: 10px">

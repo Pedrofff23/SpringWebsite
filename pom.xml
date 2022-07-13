@@ -98,18 +98,21 @@
                 <artifactId>jib-maven-plugin</artifactId>
                 <version>3.2.1</version>
                 <configuration>
-                    <from>
-                        <image>${docker.distrolesl.image}</image>
-                    </from>
                     <to>
-                        <image>${docker.image.name}</image>
-                        <tags>
-                            <tag>${project.version}</tag>
-                        </tags>
+                        <image>gcr.io/my-gcp-project/pedrofff/springboot</image>
                     </to>
-                    <container>
-                        <mainClass>com.example.mavenspring.MavenSpringApplication</mainClass>
-                    </container>
+<!--                    <from>-->
+<!--                        <image>${docker.distrolesl.image}</image>-->
+<!--                    </from>-->
+<!--                    <to>-->
+<!--                        <image>${docker.image.name}</image>-->
+<!--                        <tags>-->
+<!--                            <tag>${project.version}</tag>-->
+<!--                        </tags>-->
+<!--                    </to>-->
+<!--                    <container>-->
+<!--                        <mainClass>com.example.mavenspring.MavenSpringApplication</mainClass>-->
+<!--                    </container>-->
                 </configuration>
             </plugin>
         </plugins>
